@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import './normalize.css';
+@import './variables.css';
+@import './inventory.css';
+@import './inventory-grid.css';
+@import './inventory-slot.css';
+@import './item-slot.css';
+
+@import './inventory-hot-slots.css';
+
+@import './hotbar.css';
+@import './bars.css';
+
+@import './inventory-control.css';
+
+@import './item-drag-preview.css';
+@import './tooltip.css';
+
+@import './useful-controls.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  background: none !important;
+  overflow: hidden !important;
+  user-select: none;
+}
+
+:root {
+  --sb-track-color: transparent;
+  --sb-thumb-color: var(--color-main);
+  --sb-size: 4px;
+  --sb-radius: 0;
+}
+
+::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: var(--sb-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: var(--sb-radius);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+
+#root {
+  height: 100%;
+}
+
+.app-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.text-primary {
+  color: var(--color-main);
+}
+
+button.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  padding: 0.5rem 2rem;
+  border: 1px solid #fff;
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.2);
+
+  color: #fff;
+  font-size: 0.9rem;
+  --button-text-shadow-color: rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 0 var(--button-text-shadow-color);
+
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}

@@ -1,12 +1,12 @@
-import { Inventory, SlotWithItem } from '../../typings';
 import React, { Fragment, useMemo } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { getItemUrl } from '../../helpers';
+import { useAppSelector } from '../../store';
 import { Items } from '../../store/items';
 import { Locale } from '../../store/locale';
-import ReactMarkdown from 'react-markdown';
-import { useAppSelector } from '../../store';
-import ClockIcon from '../utils/icons/ClockIcon';
-import { getItemUrl } from '../../helpers';
+import { Inventory, SlotWithItem } from '../../typings';
 import Divider from '../utils/Divider';
+import ClockIcon from '../utils/icons/ClockIcon';
 
 const SlotTooltip: React.ForwardRefRenderFunction<
   HTMLDivElement,
@@ -43,7 +43,9 @@ const SlotTooltip: React.ForwardRefRenderFunction<
               <p>{item.metadata?.type}</p>
             )}
           </div>
+
           <Divider />
+
           {description && (
             <div className="tooltip-description">
               <ReactMarkdown className="tooltip-markdown">{description}</ReactMarkdown>

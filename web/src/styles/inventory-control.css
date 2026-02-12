@@ -1,0 +1,34 @@
+.inventory-control {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 100px;
+
+  .inventory-control-input {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    text-align: center;
+    outline: none;
+
+    min-width: 0;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(var(--color-main-rgb), 0.8);
+    transition: border 300ms;
+    width: 100%;
+
+    &:focus-within {
+      border: 1px solid rgba(var(--color-main-rgb), 1);
+    }
+  }
+
+  .inventory-control-button {
+    width: 100%;
+  }
+}

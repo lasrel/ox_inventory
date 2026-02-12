@@ -1,0 +1,7 @@
+.inventory-hot-slots {
+  place-self: end;
+  display: flex;
+  gap: var(--grid-gap);
+  padding: 0 var(--grid-gap);
+  width: 100%;
+}

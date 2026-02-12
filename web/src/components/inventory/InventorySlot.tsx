@@ -1,30 +1,31 @@
+import { useMergeRefs } from '@floating-ui/react';
 import React, { useCallback, useRef } from 'react';
-import { DragSource, Inventory, InventoryType, Slot, SlotWithItem } from '../../typings';
 import { useDrag, useDragDropManager, useDrop } from 'react-dnd';
-import { useAppDispatch } from '../../store';
-import WeightBar from '../utils/WeightBar';
-import { onDrop } from '../../dnd/onDrop';
 import { onBuy } from '../../dnd/onBuy';
-import { Items } from '../../store/items';
-import { canCraftItem, canPurchaseItem, getItemUrl, isSlotWithItem } from '../../helpers';
-import { onUse } from '../../dnd/onUse';
-import { Locale } from '../../store/locale';
 import { onCraft } from '../../dnd/onCraft';
+import { onDrop } from '../../dnd/onDrop';
+import { onUse } from '../../dnd/onUse';
+import { canCraftItem, canPurchaseItem, getItemUrl, isSlotWithItem } from '../../helpers';
 import useNuiEvent from '../../hooks/useNuiEvent';
 import { ItemsPayload } from '../../reducers/refreshSlots';
-import { closeTooltip, openTooltip } from '../../store/tooltip';
+import { useAppDispatch } from '../../store';
 import { openContextMenu } from '../../store/contextMenu';
-import { useMergeRefs } from '@floating-ui/react';
+import { Items } from '../../store/items';
+import { Locale } from '../../store/locale';
+import { closeTooltip, openTooltip } from '../../store/tooltip';
+import { DragSource, Inventory, InventoryType, Slot, SlotWithItem } from '../../typings';
+import WeightBar from '../utils/WeightBar';
 
 interface SlotProps {
   inventoryId: Inventory['id'];
   inventoryType: Inventory['type'];
   inventoryGroups: Inventory['groups'];
   item: Slot;
+  isHotSlot?: boolean;
 }
 
 const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> = (
-  { item, inventoryId, inventoryType, inventoryGroups },
+  { item, inventoryId, inventoryType, inventoryGroups, isHotSlot = false },
   ref
 ) => {
   const manager = useDragDropManager();
@@ -119,12 +120,18 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
 
   const refs = useMergeRefs([connectRef, ref]);
 
+  const itemLabel = item.metadata?.label
+    ? item.metadata.label
+    : item.name
+    ? Items[item.name]?.label || item.name
+    : undefined;
+
   return (
     <div
       ref={refs}
       onContextMenu={handleContext}
       onClick={handleClick}
-      className="inventory-slot"
+      className={`inventory-slot ${itemLabel ? 'inventory-slot-full' : 'inventory-slot-empty'}`}
       style={{
         filter:
           !canPurchaseItem(item, { type: inventoryType, groups: inventoryGroups }) || !canCraftItem(item, inventoryType)
@@ -151,31 +158,29 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
             }
           }}
         >
+          {inventoryType === 'player' && item.slot <= 5 && <div className="inventory-slot-number">{item.slot}</div>}
           <div
             className={
               inventoryType === 'player' && item.slot <= 5 ? 'item-hotslot-header-wrapper' : 'item-slot-header-wrapper'
             }
           >
-            {inventoryType === 'player' && item.slot <= 5 && <div className="inventory-slot-number">{item.slot}</div>}
             <div className="item-slot-info-wrapper">
+              <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
               <p>
                 {item.weight > 0
                   ? item.weight >= 1000
                     ? `${(item.weight / 1000).toLocaleString('en-us', {
                         minimumFractionDigits: 2,
-                      })}kg `
+                      })}kg`
                     : `${item.weight.toLocaleString('en-us', {
                         minimumFractionDigits: 0,
-                      })}g `
+                      })}g`
                   : ''}
               </p>
-              <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
             </div>
           </div>
+
           <div>
-            {inventoryType !== 'shop' && item?.durability !== undefined && (
-              <WeightBar percent={item.durability} durability />
-            )}
             {inventoryType === 'shop' && item?.price !== undefined && (
               <>
                 {item?.currency !== 'money' && item.currency !== 'black_money' && item.price > 0 && item.currency ? (
@@ -211,9 +216,13 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
               </>
             )}
             <div className="inventory-slot-label-box">
-              <div className="inventory-slot-label-text">
-                {item.metadata?.label ? item.metadata.label : Items[item.name]?.label || item.name}
-              </div>
+              <div className="inventory-slot-label-text">{itemLabel ?? ''}</div>
+            </div>
+
+            <div className="inventory-slot-durability">
+              {inventoryType !== 'shop' && item?.durability !== undefined && (
+                <WeightBar percent={item.durability} durability />
+              )}
             </div>
           </div>
         </div>

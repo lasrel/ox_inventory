@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import { useExitListener } from '../../hooks/useExitListener';
 import useNuiEvent from '../../hooks/useNuiEvent';
+import { useAppDispatch } from '../../store';
+import { closeContextMenu } from '../../store/contextMenu';
+import { refreshSlots, setAdditionalMetadata, setupInventory } from '../../store/inventory';
+import { closeTooltip } from '../../store/tooltip';
+import type { Inventory as InventoryProps } from '../../typings';
+import Tooltip from '../utils/Tooltip';
+import Fade from '../utils/transitions/Fade';
+import InventoryContext from './InventoryContext';
 import InventoryControl from './InventoryControl';
 import InventoryHotbar from './InventoryHotbar';
-import { useAppDispatch } from '../../store';
-import { refreshSlots, setAdditionalMetadata, setupInventory } from '../../store/inventory';
-import { useExitListener } from '../../hooks/useExitListener';
-import type { Inventory as InventoryProps } from '../../typings';
-import RightInventory from './RightInventory';
 import LeftInventory from './LeftInventory';
-import Tooltip from '../utils/Tooltip';
-import { closeTooltip } from '../../store/tooltip';
-import InventoryContext from './InventoryContext';
-import { closeContextMenu } from '../../store/contextMenu';
-import Fade from '../utils/transitions/Fade';
+import RightInventory from './RightInventory';
 
 const Inventory: React.FC = () => {
   const [inventoryVisible, setInventoryVisible] = useState(false);
@@ -44,9 +44,12 @@ const Inventory: React.FC = () => {
     <>
       <Fade in={inventoryVisible}>
         <div className="inventory-wrapper">
-          <LeftInventory />
-          <InventoryControl />
-          <RightInventory />
+          <div className="inventory-backdrop" />
+          <div className="inventory-content">
+            <LeftInventory />
+            <InventoryControl />
+            <RightInventory />
+          </div>
           <Tooltip />
           <InventoryContext />
         </div>

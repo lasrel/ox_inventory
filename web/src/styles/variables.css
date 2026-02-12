@@ -1,0 +1,38 @@
+:root {
+  --color-main-rgb: 128, 0, 128;
+  --color-main: rgb(var(--color-main-rgb));
+  --color-text: #c1c2c5;
+
+  --color-background: #111;
+  --color-surface: #333;
+
+  --font-main: 'Open Sans', sans-serif;
+
+  --radius: 0.15rem;
+
+  --grid-cols: 5;
+  --grid-rows: 5;
+  --grid-cell-size: 10vh;
+  --grid-gap: 4px;
+
+  --container-height: calc(
+    var(--grid-rows) * var(--grid-cell-size) + (var(--grid-rows)) * var(--grid-gap) + var(--grid-gap)
+  );
+}
+
+/* 
+$mainColor: #22232c;
+$textColor: #c1c2c5;
+$mainFont: 
+
+$secondaryColor: rgba(12, 12, 12, 0.4);
+$secondaryColorHighlight: #33343f;
+$secondaryColorLight: rgba(0, 0, 0, 0.5);
+$secondaryColorDark: rgba(12, 12, 12, 0.8);
+
+$gridCols: 5;
+$gridRows: 5;
+$gridSize: 10.2vh;
+$gridGap: 2px;
+$containerSize: calc(#{$gridRows} * #{$gridSize + 0.22vh} + #{$gridRows} * #{$gridGap}); 
+*/

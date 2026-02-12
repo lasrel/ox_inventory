@@ -1,0 +1,87 @@
+.inventory-slot {
+  --shadow-size: 20px;
+  --shadow-color: 0, 0, 0;
+  --shadow-strength: 0.2;
+
+  --border-color: 0, 0, 0;
+  --border-strength: 0.2;
+
+  --background-color: 0, 0, 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 6vh;
+
+  image-rendering: -webkit-optimize-contrast;
+
+  position: relative;
+  border-radius: var(--radius);
+
+  height: var(--grid-cell-size);
+  width: var(--grid-cell-size);
+
+  transition: box-shadow 0.3s;
+
+  background-color: rgba(var(--background-color), 0.05);
+  border: 1px solid rgba(var(--border-color), var(--border-strength));
+  box-shadow: inset 0 0 var(--shadow-size) 0 rgba(var(--shadow-color), var(--shadow-strength));
+
+  &.inventory-slot-full {
+    --background-color: var(--color-main-rgb);
+    --shadow-color: var(--color-main-rgb);
+    --shadow-strength: 0.5;
+    --border-color: var(--color-main-rgb);
+  }
+
+  &.inventory-slot-empty {
+  }
+
+  &:hover {
+    --shadow-size: 30px;
+    --shadow-strength: 0.3;
+  }
+
+  .inventory-slot-durability {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+.inventory-slot-label-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.1rem 0.25rem;
+  width: 100%;
+
+  .inventory-slot-label-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.7rem;
+  }
+}
+
+.inventory-slot-number {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 2;
+
+  background-color: #fff;
+  border-radius: calc(var(--radius) / 2);
+  aspect-ratio: 1/1;
+
+  font-size: 0.7rem;
+  color: #222;
+
+  height: 0.8rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

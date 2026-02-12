@@ -1,0 +1,57 @@
+.tooltip-wrapper {
+  pointer-events: none;
+  display: inline-flex;
+  flex-direction: column;
+
+  max-width: 200px;
+
+  background-color: var(--color-background);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(var(--color-main-rgb), 0.7);
+
+  p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.tooltip-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+.tooltip-crafting-duration {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  svg {
+    padding-right: 3px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+.tooltip-ingredients {
+  padding-top: 5px;
+}
+
+.tooltip-ingredient {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img {
+    width: 28px;
+    height: 28px;
+    padding-right: 5px;
+  }
+}

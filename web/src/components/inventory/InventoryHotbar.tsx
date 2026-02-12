@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { getItemUrl, isSlotWithItem } from '../../helpers';
 import useNuiEvent from '../../hooks/useNuiEvent';
-import { Items } from '../../store/items';
-import WeightBar from '../utils/WeightBar';
 import { useAppSelector } from '../../store';
 import { selectLeftInventory } from '../../store/inventory';
+import { Items } from '../../store/items';
 import { SlotWithItem } from '../../typings';
+import { isEnvBrowser } from '../../utils/misc';
 import SlideUp from '../utils/transitions/SlideUp';
+import WeightBar from '../utils/WeightBar';
 
 const InventoryHotbar: React.FC = () => {
-  const [hotbarVisible, setHotbarVisible] = useState(false);
+  const [hotbarVisible, setHotbarVisible] = useState(isEnvBrowser() ? true : false);
   const items = useAppSelector(selectLeftInventory).items.slice(0, 5);
 
   //stupid fix for timeout
   const [handle, setHandle] = useState<NodeJS.Timeout>();
+
   useNuiEvent('toggleHotbar', () => {
     if (hotbarVisible) {
       setHotbarVisible(false);
