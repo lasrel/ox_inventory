@@ -1,16 +1,16 @@
+import { useDragDropManager } from 'react-dnd';
 import InventoryComponent from './components/inventory';
+import DragPreview from './components/utils/DragPreview';
+import KeyPress from './components/utils/KeyPress';
 import useNuiEvent from './hooks/useNuiEvent';
-import { Items } from './store/items';
-import { Locale } from './store/locale';
+import { useAppDispatch } from './store';
 import { setImagePath } from './store/imagepath';
 import { setupInventory } from './store/inventory';
+import { Items } from './store/items';
+import { Locale } from './store/locale';
 import { Inventory } from './typings';
-import { useAppDispatch } from './store';
 import { debugData } from './utils/debugData';
-import DragPreview from './components/utils/DragPreview';
 import { fetchNui } from './utils/fetchNui';
-import { useDragDropManager } from 'react-dnd';
-import KeyPress from './components/utils/KeyPress';
 
 debugData([
   {
@@ -63,9 +63,9 @@ debugData([
         id: 'shop',
         type: 'crafting',
         slots: 5000,
-        label: 'Bob Smith',
+        label: 'Shop',
         weight: 3000,
-        maxWeight: 5000,
+        maxWeight: 10000,
         items: [
           {
             slot: 1,

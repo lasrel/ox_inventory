@@ -99,16 +99,15 @@ button.button {
   padding: 0.5rem 2rem;
   border: 1px solid #fff;
   border-radius: var(--radius);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 
   color: #fff;
-  font-size: 0.9rem;
-  --button-text-shadow-color: rgba(0, 0, 0, 0.5);
-  text-shadow: 1px 1px 0 var(--button-text-shadow-color);
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 
   transition: background-color 300ms;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
