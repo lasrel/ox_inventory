@@ -182,7 +182,7 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
 
           <div>
             {inventoryType === 'shop' && item?.price !== undefined && (
-              <>
+              <div className="item-slot-price">
                 {item?.currency !== 'money' && item.currency !== 'black_money' && item.price > 0 && item.currency ? (
                   <div className="item-slot-currency-wrapper">
                     <img
@@ -201,19 +201,17 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
                 ) : (
                   <>
                     {item.price > 0 && (
-                      <div
+                      <p
                         className="item-slot-price-wrapper"
                         style={{ color: item.currency === 'money' || !item.currency ? '#2ECC71' : '#E74C3C' }}
                       >
-                        <p>
-                          {Locale.$ || '$'}
-                          {item.price.toLocaleString('en-us')}
-                        </p>
-                      </div>
+                        {Locale.$ || '$'}
+                        {item.price.toLocaleString('en-us')}
+                      </p>
                     )}
                   </>
                 )}
-              </>
+              </div>
             )}
             <div className="inventory-slot-label-box">
               <div className="inventory-slot-label-text">{itemLabel ?? ''}</div>

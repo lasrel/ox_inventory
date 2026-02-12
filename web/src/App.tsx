@@ -61,7 +61,7 @@ debugData([
       },
       rightInventory: {
         id: 'shop',
-        type: 'crafting',
+        type: 'shop',
         slots: 5000,
         label: 'Shop',
         weight: 3000,
@@ -72,6 +72,7 @@ debugData([
             name: 'lockpick',
             weight: 500,
             price: 300,
+            count: 4,
             ingredients: {
               iron: 5,
               copper: 12,
@@ -119,8 +120,8 @@ const App: React.FC = () => {
   );
 };
 
-addEventListener("dragstart", function(event) {
-  event.preventDefault()
-})
+addEventListener('dragstart', function (event) {
+  event.preventDefault();
+});
 
 export default App;

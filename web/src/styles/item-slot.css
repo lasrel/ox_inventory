@@ -18,7 +18,7 @@
   align-items: center;
   font-size: 0.7rem;
   padding: 0.15rem;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.25rem;
 
   background-color: rgba(var(--color-main-rgb), 0.6);
@@ -34,26 +34,20 @@
   }
 }
 
-.item-slot-currency-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 3px;
+.item-slot-price {
+  position: absolute;
+  bottom: 1rem;
+  right: 0.15rem;
 
-  p {
-    font-size: 14px;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
+  .item-slot-currency-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
   }
-}
 
-.item-slot-price-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding-right: 3px;
   p {
-    font-size: 14px;
+    font-size: 0.7rem;
     text-shadow: 0.1vh 0.1vh 0 rgba(0, 0, 0, 0.7);
   }
 }

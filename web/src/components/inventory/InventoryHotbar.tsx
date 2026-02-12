@@ -10,7 +10,7 @@ import SlideUp from '../utils/transitions/SlideUp';
 import WeightBar from '../utils/WeightBar';
 
 const InventoryHotbar: React.FC = () => {
-  const [hotbarVisible, setHotbarVisible] = useState(isEnvBrowser() ? true : false);
+  const [hotbarVisible, setHotbarVisible] = useState(isEnvBrowser() ? false : false);
   const items = useAppSelector(selectLeftInventory).items.slice(0, 5);
 
   //stupid fix for timeout

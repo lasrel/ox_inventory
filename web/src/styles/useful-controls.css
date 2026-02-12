@@ -1,6 +1,6 @@
 .useful-controls-button {
-  position: fixed;
-  z-index: 3;
+  position: absolute;
+  z-index: 10;
   bottom: 1rem;
   right: 1rem;
   transition: 300ms;
