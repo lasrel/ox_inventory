@@ -6,6 +6,8 @@
   --color-background: #111;
   --color-surface: #333;
 
+  --color-money: #efbf04;
+
   --font-main: 'Open Sans', sans-serif;
 
   --radius: 0.15rem;
@@ -13,7 +15,7 @@
   --grid-cols: 5;
   --grid-rows: 5;
   --grid-cell-size: 10vh;
-  --grid-gap: 4px;
+  --grid-gap: 0.5rem;
 
   --container-height: calc(
     var(--grid-rows) * var(--grid-cell-size) + (var(--grid-rows)) * var(--grid-gap) + var(--grid-gap)

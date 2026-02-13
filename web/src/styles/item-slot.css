@@ -21,10 +21,6 @@
   padding-top: 0.5rem;
   padding-bottom: 0.25rem;
 
-  background-color: rgba(var(--color-main-rgb), 0.6);
-
-  background: linear-gradient(rgba(var(--color-main-rgb), 0), var(--color-main));
-
   .item-slot-info-wrapper {
     display: flex;
     justify-content: space-between;

@@ -1,20 +1,31 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getTotalWeight } from '../../helpers';
 import { useIntersection } from '../../hooks/useIntersection';
 import { useAppSelector } from '../../store';
+import { selectLeftInventory } from '../../store/inventory';
 import { Inventory, InventoryType } from '../../typings';
+import InventoryControl from './InventoryControl';
 import InventorySlot from './InventorySlot';
 import InventoryWeight from './InventoryWeight';
 
 const InventoryGrid: React.FC<{ inventory: Inventory }> = ({ inventory }) => {
-  const weight = useMemo(
-    () => (inventory.maxWeight !== undefined ? Math.floor(getTotalWeight(inventory.items) * 1000) / 1000 : 0),
-    [inventory.maxWeight, inventory.items]
-  );
   const [page, setPage] = useState(0);
   const containerRef = useRef(null);
   const { ref, entry } = useIntersection({ threshold: 0.5 });
   const isBusy = useAppSelector((state) => state.inventory.isBusy);
+
+  const left = useSelector(selectLeftInventory);
+  const player = left.player;
+  const accounts = player?.accounts ?? player?.money ?? {};
+  const cash = accounts.money ?? accounts.cash ?? 0;
+  const bank = accounts.bank ?? 0;
+  const crypto = accounts.crypto ?? 0;
+
+  const weight = useMemo(
+    () => (inventory.maxWeight !== undefined ? Math.floor(getTotalWeight(inventory.items) * 1000) / 1000 : 0),
+    [inventory.maxWeight, inventory.items]
+  );
 
   useEffect(() => {
     if (entry && entry.isIntersecting) {
@@ -35,7 +46,25 @@ const InventoryGrid: React.FC<{ inventory: Inventory }> = ({ inventory }) => {
     <>
       <div className="inventory-grid-wrapper" style={{ pointerEvents: isBusy ? 'none' : 'auto' }}>
         <div className="inventory-grid-header-wrapper">
-          <p className="inventory-grid-header-label">{inventory.label}</p>
+          <div className="inventory-grid-header-left">
+            <p className="inventory-grid-header-label">{inventory.label}</p>
+            {inventory.type === 'player' && (
+              <div className="inventory-grid-money">
+                <p className="inventory-grid-money-item inventory-grid-money-cash">
+                  <span className="type">cash:</span>
+                  <span className="value">{cash}</span>
+                </p>
+                <p className="inventory-grid-money-item inventory-grid-money-bank">
+                  <span className="type">bank:</span>
+                  <span className="value">{bank}</span>
+                </p>
+                <p className="inventory-grid-money-item inventory-grid-money-crypto">
+                  <span className="type">crypto:</span>
+                  <span className="value">{crypto}</span>
+                </p>
+              </div>
+            )}
+          </div>
           {inventory.maxWeight && <InventoryWeight weight={weight} maxWeight={inventory.maxWeight} />}
         </div>
 
@@ -54,7 +83,7 @@ const InventoryGrid: React.FC<{ inventory: Inventory }> = ({ inventory }) => {
           </>
         </div>
 
-        {inventory.type === InventoryType.PLAYER && (
+        {inventory.type === InventoryType.PLAYER ? (
           <div className="inventory-hot-slots">
             {hotSlots.map((item, index) => (
               <InventorySlot
@@ -68,6 +97,8 @@ const InventoryGrid: React.FC<{ inventory: Inventory }> = ({ inventory }) => {
               />
             ))}
           </div>
+        ) : (
+          <InventoryControl />
         )}
       </div>
     </>

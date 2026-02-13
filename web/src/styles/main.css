@@ -16,6 +16,7 @@
 
 @import './item-drag-preview.css';
 @import './tooltip.css';
+@import './context-menu.css';
 
 @import './useful-controls.css';
 
@@ -96,7 +97,7 @@ button.button {
   align-items: center;
   cursor: pointer;
 
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
   border: 1px solid #fff;
   border-radius: var(--radius);
   background-color: rgba(255, 255, 255, 0.1);

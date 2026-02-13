@@ -2,29 +2,48 @@
   pointer-events: none;
   display: inline-flex;
   flex-direction: column;
+  gap: 0.25rem;
+
+  z-index: 20;
 
   max-width: 200px;
 
-  background-color: var(--color-background);
-  padding: 0.5rem;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.1);
+
+  box-shadow: inset 0 0 1rem 0 rgba(255, 255, 255, 0.1);
+
+  padding: 1rem;
   border-radius: var(--radius);
-  border: 1px solid rgba(var(--color-main-rgb), 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   p {
-    font-size: 12px;
+    font-size: 0.7rem;
     font-weight: 400;
   }
 }
 
-.tooltip-header-wrapper {
+.tooltip-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  p {
-    font-size: 0.8rem;
-    font-weight: 600;
+  font-weight: 600;
+
+  .tooltip-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+
+    .tooltip-name {
+      font-size: 0.9rem;
+    }
+
+    .tooltip-count {
+      font-size: 0.7rem;
+      color: var(--color-main);
+    }
   }
 }
 

@@ -10,10 +10,48 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: end;
+
+  min-height: 3rem;
   padding: 0 var(--grid-gap);
 
-  .inventory-grid-header-label {
-    font-weight: 600;
+  .inventory-grid-header-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    height: 100%;
+    gap: 0.25rem;
+
+    .inventory-grid-header-label {
+      font-weight: 600;
+    }
+
+    .inventory-grid-money {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
+
+      .inventory-grid-money-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        & > .value {
+          color: var(--color-money);
+          font-size: 0.8rem;
+        }
+
+        & > .type {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 0.6rem;
+        }
+      }
+    }
   }
 
   .inventory-grid-header-weight {
@@ -28,10 +66,12 @@
     .inventory-grid-header-weight-visual {
       display: flex;
       gap: 4px;
+      border-radius: var(--radius);
+      overflow: hidden;
 
       .weight-square {
         width: 0.5rem;
-        height: 2px;
+        height: 4px;
         background-color: lightgray;
 
         &.filled {

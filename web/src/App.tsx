@@ -57,22 +57,38 @@ debugData([
               imageurl: 'https://i.imgur.com/2xHhTTz.png',
             },
           },
+          {
+            slot: 7,
+            name: 'burger',
+            count: 2,
+            weight: 400,
+            metadata: {
+              description: 'test description',
+            },
+          },
+          {
+            slot: 8,
+            name: 'WEAPON_RAILGUN',
+            label: 'Railgun',
+            weight: 3570,
+            durability: 0.5,
+            ammoname: 'ammo-railgun',
+          },
         ],
       },
       rightInventory: {
         id: 'shop',
-        type: 'shop',
+        type: 'stash',
         slots: 5000,
         label: 'Shop',
         weight: 3000,
-        maxWeight: 10000,
+        maxWeight: 5000,
         items: [
           {
             slot: 1,
             name: 'lockpick',
             weight: 500,
             price: 300,
-            count: 4,
             ingredients: {
               iron: 5,
               copper: 12,
@@ -87,6 +103,16 @@ debugData([
     },
   },
 ]);
+
+const weaponDef = Weapons['WEAPON_RAILGUN']; // whatever your debug env exposes
+debugInventory.push({
+  slot: 8,
+  name: 'WEAPON_RAILGUN',
+  label: weaponDef.label,
+  type: weaponDef.type,
+  metadata: { ammo: weaponDef.ammo },
+  weight: weaponDef.weight,
+});
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();

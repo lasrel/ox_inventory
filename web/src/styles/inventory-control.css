@@ -1,12 +1,11 @@
 .inventory-control {
-  display: flex;
   position: relative;
-  flex-direction: column;
+  display: flex;
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
 
-  max-width: 100px;
+  max-width: 100%;
 
   .inventory-control-input {
     padding: 0.5rem 1rem;
@@ -16,12 +15,12 @@
     outline: none;
 
     min-width: 0;
+    flex: 1;
 
     color: white;
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(var(--color-main-rgb), 0.8);
     transition: border 300ms;
-    width: 100%;
 
     &:focus-within {
       border: 1px solid rgba(var(--color-main-rgb), 1);
@@ -29,6 +28,5 @@
   }
 
   .inventory-control-button {
-    width: 100%;
   }
 }

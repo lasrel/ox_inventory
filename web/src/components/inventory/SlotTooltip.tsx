@@ -5,7 +5,6 @@ import { useAppSelector } from '../../store';
 import { Items } from '../../store/items';
 import { Locale } from '../../store/locale';
 import { Inventory, SlotWithItem } from '../../typings';
-import Divider from '../utils/Divider';
 import ClockIcon from '../utils/icons/ClockIcon';
 
 const SlotTooltip: React.ForwardRefRenderFunction<
@@ -25,26 +24,30 @@ const SlotTooltip: React.ForwardRefRenderFunction<
     <>
       {!itemData ? (
         <div className="tooltip-wrapper" ref={ref} style={style}>
-          <div className="tooltip-header-wrapper">
-            <p>{item.name}</p>
+          <div className="tooltip-header">
+            <div className="tooltip-title">
+              <p className="tooltip-name">{item.name}</p>
+              <p className="tooltip-count">{item.count || 1}x</p>
+            </div>
           </div>
-          <Divider />
         </div>
       ) : (
         <div style={{ ...style }} className="tooltip-wrapper" ref={ref}>
-          <div className="tooltip-header-wrapper">
-            <p>{item.metadata?.label || itemData.label || item.name}</p>
+          <div className="tooltip-header">
+            <div className="tooltip-title">
+              <p className="tooltip-name">{item.metadata?.label || itemData.label || item.name}</p>
+              <p className="tooltip-count">{item.count || 1}x</p>
+            </div>
+
             {inventoryType === 'crafting' ? (
               <div className="tooltip-crafting-duration">
                 <ClockIcon />
                 <p>{(item.duration !== undefined ? item.duration : 3000) / 1000}s</p>
               </div>
             ) : (
-              <p>{item.metadata?.type}</p>
+              <p className="tooltip-type">{item.metadata?.type}</p>
             )}
           </div>
-
-          <Divider />
 
           {description && (
             <div className="tooltip-description">

@@ -126,12 +126,18 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
     ? Items[item.name]?.label || item.name
     : undefined;
 
+  const hasItem = isSlotWithItem(item);
+
   return (
     <div
       ref={refs}
       onContextMenu={handleContext}
       onClick={handleClick}
-      className={`inventory-slot ${itemLabel ? 'inventory-slot-full' : 'inventory-slot-empty'}`}
+      className={`
+        inventory-slot 
+        ${isHotSlot ? 'inventory-hot-slot' : ''} 
+        ${hasItem ? 'inventory-slot-full' : 'inventory-slot-empty'}
+      `}
       style={{
         filter:
           !canPurchaseItem(item, { type: inventoryType, groups: inventoryGroups }) || !canCraftItem(item, inventoryType)
@@ -142,7 +148,7 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
         border: isOver ? '1px dashed rgba(255,255,255,0.4)' : '',
       }}
     >
-      {isSlotWithItem(item) && (
+      {hasItem && (
         <div
           className="item-slot-wrapper"
           onMouseEnter={() => {
