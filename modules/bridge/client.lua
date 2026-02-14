@@ -6,26 +6,14 @@ function client.setPlayerData(key, value)
 	OnPlayerData(key, value)
 end
 
----Checks whether the player has a required group and rank
----@param group string | table<string, number | number[]>
----@return string? groupName
----@return number? groupRank
 function client.hasGroup(group)
 	if not PlayerData.loaded then return end
 
 	if type(group) == 'table' then
-		for name, requiredRank in pairs(group) do
+		for name, rank in pairs(group) do
 			local groupRank = PlayerData.groups[name]
-			if groupRank then
-				if type(requiredRank) == 'table' then
-					if lib.table.contains(requiredRank, groupRank) then
-						return name, groupRank
-					end
-				else
-					if groupRank >= (requiredRank or 0) then
-						return name, groupRank
-					end
-				end
+			if groupRank and groupRank >= (rank or 0) then
+				return name, groupRank
 			end
 		end
 	else

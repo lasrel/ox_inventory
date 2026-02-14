@@ -24,9 +24,7 @@ RegisterNetEvent("ND:characterLoaded", function(character)
     client.setPlayerData("groups", reorderGroups(character.groups))
 end)
 
-RegisterNetEvent("ND:updateCharacter", function(character, updatedData)
-    local validUpdateData = { ["job"] = true, ["groups"] = true, ["jobInfo"] = true }
-    if not validUpdateData[updatedData] then return end
+RegisterNetEvent("ND:updateCharacter", function(character)
     client.setPlayerData("groups", reorderGroups(character.groups))
 end)
 

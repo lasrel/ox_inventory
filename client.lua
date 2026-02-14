@@ -279,8 +279,7 @@ function client.openInventory(inv, data)
         action = 'setupInventory',
         data = {
             leftInventory = left,
-						rightInventory = currentInventory,
-						player = PlayerData
+            rightInventory = currentInventory
         }
     })
 
@@ -338,8 +337,7 @@ RegisterNetEvent('ox_inventory:forceOpenInventory', function(left, right)
 		action = 'setupInventory',
 		data = {
 			leftInventory = left,
-			rightInventory = currentInventory,
-			player = PlayerData
+			rightInventory = currentInventory
 		}
 	})
 end)
@@ -1600,8 +1598,7 @@ RegisterNetEvent('ox_inventory:viewInventory', function(left, right)
 		action = 'setupInventory',
 		data = {
 			leftInventory = left,
-			rightInventory = currentInventory,
-			player = PlayerData
+			rightInventory = currentInventory
 		}
 	})
 end)

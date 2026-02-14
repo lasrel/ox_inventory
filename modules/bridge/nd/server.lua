@@ -48,10 +48,7 @@ AddEventHandler("ND:moneyChange", function(src, account, amount, changeType, rea
     Inventory.SetItem(src, "money", changeType == "set" and amount or changeType == "remove" and item - amount or changeType == "add" and item + amount)
 end)
 
-AddEventHandler("ND:updateCharacter", function(character, updatedData)
-    local validUpdateData = { ["job"] = true, ["groups"] = true, ["jobInfo"] = true }
-    if not validUpdateData[updatedData] then return end
-	
+AddEventHandler("ND:updateCharacter", function(character)
     local inventory = Inventory(character.source)
 	if not inventory then return end
 	inventory.player.groups = reorderGroups(character.groups)
