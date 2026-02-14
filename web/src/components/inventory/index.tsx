@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useExitListener } from '../../hooks/useExitListener';
 import useNuiEvent from '../../hooks/useNuiEvent';
 import { useAppDispatch } from '../../store';
@@ -9,7 +9,6 @@ import type { Inventory as InventoryProps } from '../../typings';
 import Tooltip from '../utils/Tooltip';
 import Fade from '../utils/transitions/Fade';
 import InventoryContext from './InventoryContext';
-import InventoryControl from './InventoryControl';
 import InventoryHotbar from './InventoryHotbar';
 import LeftInventory from './LeftInventory';
 import RightInventory from './RightInventory';
@@ -40,6 +39,16 @@ const Inventory: React.FC = () => {
     dispatch(setAdditionalMetadata(data));
   });
 
+  const playerCanvasRef = useRef<HTMLCanvasElement>(null);
+
+  useNuiEvent<{ imageBase64: string }>('setupPlayerModel', (data) => {
+    if (!playerCanvasRef.current) return;
+    const ctx = playerCanvasRef.current.getContext('2d');
+    const img = new Image();
+    img.onload = () => ctx?.drawImage(img, 0, 0, 180, 300); // match your canvas size
+    img.src = data.imageBase64;
+  });
+
   return (
     <>
       <Fade in={inventoryVisible}>
@@ -47,7 +56,17 @@ const Inventory: React.FC = () => {
           <div className="inventory-backdrop" />
           <div className="inventory-content">
             <LeftInventory />
-            <InventoryControl />
+            {/* <InventoryControl /> */}
+
+            <div className="inventory-center">
+              <canvas
+                ref={playerCanvasRef}
+                width={180}
+                height={300}
+                style={{ borderRadius: '8px', backgroundColor: '#222' }}
+              />
+            </div>
+
             <RightInventory />
           </div>
           <Tooltip />

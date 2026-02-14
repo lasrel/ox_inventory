@@ -30,6 +30,11 @@ server_scripts {
 
 client_script 'init.lua'
 
+client_scripts {
+    'modules/bridge/playerModel.lua',
+}
+
+
 ui_page 'web/build/index.html'
 
 files {
