@@ -31,7 +31,7 @@ debugData([
       leftInventory: {
         id: 'test',
         type: 'player',
-        slots: 10,
+        slots: 50,
         label: 'Bob Smith',
         weight: 3000,
         maxWeight: 5000,
@@ -73,12 +73,18 @@ debugData([
             weight: 3570,
             count: 1,
           },
+          {
+            slot: 15,
+            name: 'money',
+            weight: 0,
+            count: 200000,
+          },
         ] satisfies DebugItem[],
       },
       rightInventory: {
         id: 'shop',
         type: 'stash',
-        slots: 10,
+        slots: 5000,
         label: 'Shop',
         weight: 3000,
         maxWeight: 5000,

@@ -103,7 +103,7 @@
 
       .weight-square {
         width: 0.5rem;
-        height: .5rem;
+        height: 0.5rem;
         background-color: lightgray;
 
         transform: skewX(-20deg);
