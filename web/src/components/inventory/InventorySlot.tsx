@@ -10,7 +10,6 @@ import useNuiEvent from '../../hooks/useNuiEvent';
 import { ItemsPayload } from '../../reducers/refreshSlots';
 import { useAppDispatch } from '../../store';
 import { openContextMenu } from '../../store/contextMenu';
-import { Items } from '../../store/items';
 import { Locale } from '../../store/locale';
 import { closeTooltip, openTooltip } from '../../store/tooltip';
 import { DragSource, Inventory, InventoryType, Slot, SlotWithItem } from '../../typings';
@@ -120,12 +119,6 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
 
   const refs = useMergeRefs([connectRef, ref]);
 
-  const itemLabel = item.metadata?.label
-    ? item.metadata.label
-    : item.name
-    ? Items[item.name]?.label || item.name
-    : undefined;
-
   const hasItem = isSlotWithItem(item);
 
   return (
@@ -145,7 +138,7 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
             : undefined,
         opacity: isDragging ? 0.4 : 1.0,
         backgroundImage: `url(${item?.name ? getItemUrl(item as SlotWithItem) : 'none'}`,
-        border: isOver ? '1px dashed rgba(255,255,255,0.4)' : '',
+        border: isOver ? '1px dashed rgba(255,255,255,0.4)' : undefined,
       }}
     >
       {hasItem && (
@@ -171,8 +164,8 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
             }
           >
             <div className="item-slot-info-wrapper">
-              <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
-              <p>
+              {item.count > 1 && <p>{item.count.toLocaleString('en-us')}x</p>}
+              {/* <p>
                 {item.weight > 0
                   ? item.weight >= 1000
                     ? `${(item.weight / 1000).toLocaleString('en-us', {
@@ -182,7 +175,7 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
                         minimumFractionDigits: 0,
                       })}g`
                   : ''}
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -219,9 +212,9 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
                 )}
               </div>
             )}
-            <div className="inventory-slot-label-box">
+            {/*  <div className="inventory-slot-label-box">
               <div className="inventory-slot-label-text">{itemLabel ?? ''}</div>
-            </div>
+            </div> */}
 
             <div className="inventory-slot-durability">
               {inventoryType !== 'shop' && item?.durability !== undefined && (

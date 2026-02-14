@@ -1,5 +1,5 @@
 .inventory-slot {
-  --shadow-size: 20px;
+  --shadow-size: 10px;
   --shadow-color: 0, 0, 0;
   --shadow-strength: 0.2;
 
@@ -29,7 +29,7 @@
   &.inventory-slot-full {
     --background-color: var(--color-main-rgb);
     --shadow-color: var(--color-main-rgb);
-    --shadow-strength: 0.5;
+    --shadow-strength: 0.2;
     --border-color: var(--color-main-rgb);
   }
 
@@ -37,7 +37,7 @@
   }
 
   &:hover {
-    --shadow-size: 30px;
+    --shadow-size: 20px;
     --shadow-strength: 0.15;
   }
 
@@ -62,6 +62,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.7rem;
+    line-height: .9rem;
   }
 }
 

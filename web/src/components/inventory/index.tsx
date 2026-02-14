@@ -9,6 +9,7 @@ import type { Inventory as InventoryProps } from '../../typings';
 import Tooltip from '../utils/Tooltip';
 import Fade from '../utils/transitions/Fade';
 import InventoryContext from './InventoryContext';
+import InventoryControl from './InventoryControl';
 import InventoryHotbar from './InventoryHotbar';
 import LeftInventory from './LeftInventory';
 import RightInventory from './RightInventory';
@@ -28,9 +29,7 @@ const Inventory: React.FC = () => {
   useNuiEvent<{
     leftInventory?: InventoryProps;
     rightInventory?: InventoryProps;
-    player?: any;
   }>('setupInventory', (data) => {
-    if (data.player && data.leftInventory) data.leftInventory.player = data.player;
     dispatch(setupInventory(data));
     !inventoryVisible && setInventoryVisible(true);
   });
@@ -48,6 +47,7 @@ const Inventory: React.FC = () => {
           <div className="inventory-backdrop" />
           <div className="inventory-content">
             <LeftInventory />
+            <InventoryControl />
             <RightInventory />
           </div>
           <Tooltip />

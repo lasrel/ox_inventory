@@ -20,12 +20,6 @@
 
 @import './useful-controls.css';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: var(--font-main);
@@ -36,6 +30,10 @@ body {
   background: none !important;
   overflow: hidden !important;
   user-select: none;
+}
+
+#root {
+  height: 100%;
 }
 
 :root {
@@ -63,10 +61,6 @@ body {
   body {
     scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
-}
-
-#root {
-  height: 100%;
 }
 
 .app-wrapper {
@@ -110,5 +104,51 @@ button.button {
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.background-icon {
+  --background-size: 3rem;
+  --bg-icon-color: var(--color-main);
+
+  &.white {
+    --bg-icon-color: rgba(255, 255, 255, 0.1);
+  }
+
+  width: var(--background-size);
+  height: var(--background-size);
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:before {
+    content: '';
+
+    --outline-width: 2px;
+    --outline-offset: 4px;
+
+    position: absolute;
+
+    background-color: var(--bg-icon-color);
+
+    transform: rotate(45deg) scale(0.7071);
+    transform-origin: center;
+
+    width: calc(100% - (var(--outline-width) * 2) - (var(--outline-offset) * 2));
+    height: calc(100% - (var(--outline-width) * 2) - (var(--outline-offset) * 2));
+
+    outline: var(--outline-width) solid var(--bg-icon-color);
+    outline-offset: var(--outline-offset);
+  }
+
+  & svg {
+    color: rgba(255, 255, 255, 1);
+    width: auto;
+    height: 70%;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
   }
 }

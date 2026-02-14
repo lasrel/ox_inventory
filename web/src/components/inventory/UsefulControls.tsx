@@ -7,7 +7,7 @@ import {
   useInteractions,
   useTransitionStyles,
 } from '@floating-ui/react';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Locale } from '../../store/locale';
 
 interface Props {
@@ -65,10 +65,10 @@ const Shortcut = ({ keys, children }: { keys: string[]; children: string }) => (
   <div className="shortcut">
     <div className="shortcut-keys">
       {keys.map((key, index, array) => (
-        <>
+        <Fragment key={index}>
           <kbd>{key}</kbd>
           {index + 1 < array.length ? '+' : ''}
-        </>
+        </Fragment>
       ))}
     </div>
     <p>{children || 'unavailable'}</p>

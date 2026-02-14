@@ -15,5 +15,4 @@ export type Inventory = {
   maxWeight?: number;
   label?: string;
   groups?: Record<string, number>;
-  player?: { accounts?: Record<string, number>; money?: Record<string, number> };
 };

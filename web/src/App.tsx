@@ -12,6 +12,18 @@ import { Inventory } from './typings';
 import { debugData } from './utils/debugData';
 import { fetchNui } from './utils/fetchNui';
 
+interface DebugItem {
+  slot: number;
+  name: string;
+  count: number;
+  weight: number;
+  metadata?: {
+    [key: string]: any;
+  };
+  durability?: number;
+  ammoname?: string;
+}
+
 debugData([
   {
     action: 'setupInventory',
@@ -19,34 +31,23 @@ debugData([
       leftInventory: {
         id: 'test',
         type: 'player',
-        slots: 50,
+        slots: 10,
         label: 'Bob Smith',
         weight: 3000,
         maxWeight: 5000,
         items: [
           {
-            slot: 1,
-            name: 'iron',
-            weight: 3000,
-            metadata: {
-              description: `name: Svetozar Miletic  \n Gender: Male`,
-              ammo: 3,
-              mustard: '60%',
-              ketchup: '30%',
-              mayo: '10%',
-            },
-            count: 5,
-          },
-          { slot: 2, name: 'powersaw', weight: 0, count: 1, metadata: { durability: 75 } },
-          { slot: 3, name: 'copper', weight: 100, count: 12, metadata: { type: 'Special' } },
-          {
             slot: 4,
             name: 'water',
-            weight: 100,
             count: 1,
-            metadata: { description: 'Generic item description' },
+            weight: 500,
           },
-          { slot: 5, name: 'water', weight: 100, count: 1 },
+          {
+            slot: 5,
+            name: 'water',
+            count: 1,
+            weight: 500,
+          },
           {
             slot: 6,
             name: 'backwoods',
@@ -69,17 +70,15 @@ debugData([
           {
             slot: 8,
             name: 'WEAPON_RAILGUN',
-            label: 'Railgun',
             weight: 3570,
-            durability: 0.5,
-            ammoname: 'ammo-railgun',
+            count: 1,
           },
-        ],
+        ] satisfies DebugItem[],
       },
       rightInventory: {
         id: 'shop',
         type: 'stash',
-        slots: 5000,
+        slots: 10,
         label: 'Shop',
         weight: 3000,
         maxWeight: 5000,
@@ -87,32 +86,20 @@ debugData([
           {
             slot: 1,
             name: 'lockpick',
-            weight: 500,
-            price: 300,
+            label: 'Lockpick',
+            weight: 160,
             ingredients: {
-              iron: 5,
-              copper: 12,
-              powersaw: 0.1,
+              scrapmetal: 5,
+              WEAPON_HAMMER: 0.05,
             },
-            metadata: {
-              description: 'Simple lockpick that breaks easily and can pick basic door locks',
-            },
+            duration: 5000,
+            count: 2,
           },
         ],
       },
     },
   },
 ]);
-
-const weaponDef = Weapons['WEAPON_RAILGUN']; // whatever your debug env exposes
-debugInventory.push({
-  slot: 8,
-  name: 'WEAPON_RAILGUN',
-  label: weaponDef.label,
-  type: weaponDef.type,
-  metadata: { ammo: weaponDef.ammo },
-  weight: weaponDef.weight,
-});
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
